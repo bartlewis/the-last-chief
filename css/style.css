@@ -430,12 +430,8 @@ a:hover {
   }
 
   .hero__content {
-    text-align: left;
+    text-align: center;
     max-width: 520px;
-  }
-
-  .hero__title-rule {
-    margin-left: 0;
   }
 
   .hero__subtitle-break {
