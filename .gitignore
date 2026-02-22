@@ -1,3 +1,4 @@
 source-material/
 .claude/
 .DS_Store
+.vscode/
