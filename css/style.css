@@ -1120,6 +1120,11 @@ a:hover {
   display: flex;
   flex-direction: column;
   gap: var(--space-xs);
+  margin-bottom: var(--space-xs);
+}
+
+.signup-form__group:last-of-type {
+  margin-bottom: 0;
 }
 
 @media (min-width: 480px) {

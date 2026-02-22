@@ -664,6 +664,18 @@
               method="POST"
             >
               <div class="signup-form__group">
+                <label for="name" class="visually-hidden">Full name</label>
+                <input
+                  type="text"
+                  id="name"
+                  name="name"
+                  placeholder="Your name"
+                  required
+                  class="signup-form__input"
+                  autocomplete="name"
+                />
+              </div>
+              <div class="signup-form__group">
                 <label for="email" class="visually-hidden">Email address</label>
                 <input
                   type="email"
@@ -694,7 +706,7 @@
 
             <div class="signup-success" id="signup-success" hidden>
               <p>
-                Thank you! We&rsquo;ll notify you when
+                Thank you, <span id="signup-success-name"></span>! We&rsquo;ll notify you when
                 <em>The Last Chief</em> is available.
               </p>
             </div>

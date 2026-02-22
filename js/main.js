@@ -208,9 +208,13 @@
     // --- Email Signup Form ---
     var form = document.getElementById("signup-form");
     var successMsg = document.getElementById("signup-success");
+    var successName = document.getElementById("signup-success-name");
 
     form.addEventListener("submit", function (e) {
       e.preventDefault();
+
+      var firstName = (form.querySelector("#name").value.trim().split(" ")[0]);
+      successName.textContent = firstName;
 
       var btn = form.querySelector(".signup-form__button");
       var originalText = btn.textContent;
