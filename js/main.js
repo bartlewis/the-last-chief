@@ -205,52 +205,55 @@
       window.scrollTo({ top: 0, behavior: "smooth" });
     });
 
-    // --- Email Signup Form ---
-    var form = document.getElementById("signup-form");
-    var successMsg = document.getElementById("signup-success");
-    var successName = document.getElementById("signup-success-name");
+    // --- Stay in Touch Form ---
+    var touchForm = document.getElementById("touch-form");
+    if (touchForm) {
+      var touchSuccess = document.getElementById("touch-success");
+      var touchSuccessName = document.getElementById("touch-success-name");
 
-    form.addEventListener("submit", function (e) {
-      e.preventDefault();
+      touchForm.addEventListener("submit", function (e) {
+        e.preventDefault();
 
-      var firstName = (form.querySelector("#name").value.trim().split(" ")[0]);
-      successName.textContent = firstName;
+        var nameInput = touchForm.querySelector("#touch-name");
+        var firstName = nameInput.value.trim().split(" ")[0];
+        if (touchSuccessName) {
+          touchSuccessName.textContent = firstName;
+        }
 
-      var btn = form.querySelector(".signup-form__button");
-      var originalText = btn.textContent;
-      btn.textContent = "Sending...";
-      btn.disabled = true;
+        var btn = touchForm.querySelector(".touch-form__button");
+        var originalText = btn.textContent;
+        btn.textContent = "Sending...";
+        btn.disabled = true;
 
-      // If the Formspree action URL has a real ID, submit via fetch
-      var action = form.getAttribute("action");
-      if (action && action.indexOf("PLACEHOLDER") === -1) {
-        fetch(action, {
-          method: "POST",
-          body: new FormData(form),
-          headers: { Accept: "application/json" },
-        })
-          .then(function (response) {
-            if (response.ok) {
-              form.hidden = true;
-              successMsg.hidden = false;
-            } else {
+        var action = touchForm.getAttribute("action");
+        if (action && action.indexOf("PLACEHOLDER") === -1) {
+          fetch(action, {
+            method: "POST",
+            body: new FormData(touchForm),
+            headers: { Accept: "application/json" },
+          })
+            .then(function (response) {
+              if (response.ok) {
+                touchForm.hidden = true;
+                if (touchSuccess) touchSuccess.hidden = false;
+              } else {
+                btn.textContent = originalText;
+                btn.disabled = false;
+                alert("Something went wrong. Please try again.");
+              }
+            })
+            .catch(function () {
               btn.textContent = originalText;
               btn.disabled = false;
               alert("Something went wrong. Please try again.");
-            }
-          })
-          .catch(function () {
-            btn.textContent = originalText;
-            btn.disabled = false;
-            alert("Something went wrong. Please try again.");
-          });
-      } else {
-        // Placeholder mode — just show the success message
-        setTimeout(function () {
-          form.hidden = true;
-          successMsg.hidden = false;
-        }, 600);
-      }
-    });
+            });
+        } else {
+          setTimeout(function () {
+            touchForm.hidden = true;
+            if (touchSuccess) touchSuccess.hidden = false;
+          }, 600);
+        }
+      });
+    }
   } // end init()
 })();
